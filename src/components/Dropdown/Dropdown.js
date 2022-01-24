@@ -47,21 +47,21 @@ const Dropdown = (props) => {
     }
 
     function dragEndHandler(e){
-        var options = document.querySelectorAll('.btn');
+        var options = document.querySelectorAll('.itemHover');
         options.forEach((option) => {
-            option.classList.remove('btn');
+            option.classList.remove('itemHover');
         })
     }
 
     function dragLeaveHandler(e, item){
-        var options = document.querySelectorAll('.btn');
+        var options = document.querySelectorAll('.itemHover');
         options.forEach((option) => {
-            option.classList.remove('btn');
+            option.classList.remove('itemHover');
         })
     }
 
     function dragEnterHandler(e, item){
-        e.target.classList.add('btn');
+        e.target.classList.add('itemHover');
         
     }
 
@@ -105,13 +105,13 @@ const Dropdown = (props) => {
             onClick={clickDropdownHandler}
             tabIndex="0" >          
             <div 
-                className='dropdown__selectedItems item'>
+                className='dropdown__selectedItems itemList'>
                 {
                     selectedItems.length === 0 ? <p className='dropdown__title'>{props.title}</p> :
 
                     selectedItems.map((item) => (
                             <p 
-                                className='options'
+                                className='option'
                                 key={item.id} 
                                 draggable='true'
                                 onDragStart={(e) => dragStartHandler(e, item)}
@@ -127,7 +127,7 @@ const Dropdown = (props) => {
             </div>
             <div ref={dropdownOptionRef} className='dropdown__info'>
                 { isDropdownOpen ? 
-                    <ul className='item'>
+                    <ul className='itemList'>
                         {
                             options.map(option => (
                                 <li key={option.id} onClick={(event) => selectItemHandler(event, option)}>
