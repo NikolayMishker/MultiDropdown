@@ -4,10 +4,13 @@ import {dropdownTitle, dropdownInfo} from './Data/SeedData';
 
 function App() {
 
+  const onChangeHandler = (str) =>{
+      //console.log(str);
+  }
+
   return (
     <div className='app'>
-          <Dropdown title={dropdownTitle} options={dropdownInfo}/>
-          <Dropdown title={dropdownTitle} options={dropdownInfo}/>
+          <Dropdown onChange={onChangeHandler} title={dropdownTitle} options={dropdownInfo}/>
     </div>
 
   );

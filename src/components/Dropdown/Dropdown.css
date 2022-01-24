@@ -49,6 +49,7 @@ li{
 .options{
     border-radius: 5px;
     background-color: rgb(157, 223, 139);
+    cursor: pointer;
 }
 
 .cross{
@@ -63,5 +64,9 @@ button{
 }
 
 button:hover{
+    background-color: grey;
+}
+
+.btn{
     background-color: grey;
 }
