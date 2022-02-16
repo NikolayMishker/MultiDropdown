@@ -4,8 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 const Dropdown = (props) => {
 
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedItems, setSelectedItems] = useState([]);
-    const [options, setOptions] = useState(props.options);
+    const [options, setOptions] = useState(props.options.filter(x => !props.value.includes(x.id)));
     const [currentCard, setCurrentCard] = useState(null);
 
     const dropdownRef = useRef(null)
@@ -19,12 +18,13 @@ const Dropdown = (props) => {
     }
 
     useEffect(() => {
-        document.addEventListener('mousedown', closeDropdownHandler)
-    }, [])
+        setOptions(props.options.filter(x => !props.value.includes(x.id)));
+    }, [props.value])
 
     useEffect(() => {
-        props.onChange(selectedItems);
-    }, [props, selectedItems])
+        document.addEventListener('mousedown', closeDropdownHandler);
+    }, [])
+
 
     const clickDropdownHandler = () => {
         setDropdownOpen(!isDropdownOpen);
@@ -32,13 +32,13 @@ const Dropdown = (props) => {
 
     function selectItemHandler(event, option) {
         event.stopPropagation();
-        setSelectedItems((prev) => [...prev, option]);         
+        props.onChange((prev) => [...prev, option.id]);         
         setOptions((prev) => prev.filter(x => x !== option))
     }
 
     function deleteSelectedItemHandler(event, item) {
         event.stopPropagation();
-        setSelectedItems((prev) => prev.filter(x => x !== item));         
+        props.onChange((prev) => prev.filter(x => x !== item.id));         
         setOptions((prev) => [...prev, item])
     }
 
@@ -73,12 +73,13 @@ const Dropdown = (props) => {
         e.preventDefault();
         e.stopPropagation();
 
-        let items = [...selectedItems];
-        const firstElementIndex = items.indexOf(item);
-        const secondElementIndex = items.indexOf(currentCard);
-
-        const arr = moveArrayElements(items, secondElementIndex, firstElementIndex)
-        setSelectedItems(arr);
+        let items = [...props.value];
+        const firstElementIndex = items.indexOf(item.id);
+        const secondElementIndex = items.indexOf(currentCard.id);
+        console.log(items);
+        const arr = moveArrayElements(items, secondElementIndex, firstElementIndex);
+        console.log(arr);
+        props.onChange(arr);
         setCurrentCard(null);
     }
 
@@ -107,9 +108,13 @@ const Dropdown = (props) => {
             <div 
                 className='dropdown__selectedItems itemList'>
                 {
-                    selectedItems.length === 0 ? <p className='dropdown__title'>{props.title}</p> :
+                    props.value.length === 0 ? <p className='dropdown__title'>{props.title}</p> :
 
-                    selectedItems.map((item) => (
+                    props.value.map((id) => {
+
+                        let item = props.options.filter(x => x.id === id)[0];
+
+                        return (
                             <p 
                                 className='option'
                                 key={item.id} 
@@ -119,10 +124,11 @@ const Dropdown = (props) => {
                                 onDragLeave={(e) => dragLeaveHandler(e, item)}
                                 onDragEnd={(e) => dragEndHandler(e)}
                                 onDragOver={(e) => dragOverHandler(e, item)}
-                                onDrop={(e) => dropHandler(e, item)}>{item.value}
+                                onDrop={(e) => dropHandler(e, item)}
+                                >{item.value}
                                 <span onClickCapture={(e) => deleteSelectedItemHandler(e, item)}> x</span>
-                            </p> 
-                    ))
+                            </p> )
+                    })
                 }
             </div>
             <div ref={dropdownOptionRef} className='dropdown__info'>

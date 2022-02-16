@@ -1,16 +1,19 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 import Dropdown from './components/Dropdown/Dropdown';
 import {dropdownTitle, dropdownInfo} from './Data/SeedData';
 
 function App() {
 
-  const onChangeHandler = (str) =>{
-      //console.log(str);
-  }
+  const [selectedItems, setSelectedItems] = useState([2]);
+
+  useEffect(() => {
+  }, [selectedItems])
 
   return (
     <div className='app'>
-          <Dropdown onChange={onChangeHandler} title={dropdownTitle} options={dropdownInfo}/>
+          <Dropdown value={selectedItems} onChange={setSelectedItems} title={dropdownTitle} options={dropdownInfo}/>
+          <Dropdown value={selectedItems} onChange={setSelectedItems} title={dropdownTitle} options={dropdownInfo}/>
     </div>
 
   );
