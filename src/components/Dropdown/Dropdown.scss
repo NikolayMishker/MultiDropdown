@@ -1,0 +1,39 @@
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 5px;
+
+    .itemList{
+        list-style: none;
+        min-width: 200px;
+        border-radius: 2px;
+        border: 1px solid black;
+
+        li {
+            list-style: none;
+            text-align: center;
+        }
+    }
+
+    .dropdown__selectedItems{
+        padding: 10px 0;
+        display: flex;
+
+        p{
+            padding: 0 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background-color: rgb(157, 223, 139);
+            cursor: pointer;
+
+            &.itemHover{
+                background-color: grey;
+            }
+        }
+
+        .dropdown__title{
+            padding-left: 15px;
+        }
+    }
+}

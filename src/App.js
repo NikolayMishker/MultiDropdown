@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { useState, useEffect } from 'react';
 import Dropdown from './components/Dropdown/Dropdown';
 import {dropdownTitle, dropdownInfo} from './Data/SeedData';

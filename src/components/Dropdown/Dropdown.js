@@ -1,4 +1,4 @@
-import './Dropdown.css';
+import './Dropdown.scss';
 import { useState, useRef, useEffect } from 'react';
 
 const Dropdown = (props) => {
@@ -47,15 +47,15 @@ const Dropdown = (props) => {
     }
 
     function dragEndHandler(e){
-        var options = document.querySelectorAll('.itemHover');
-        options.forEach((option) => {
+        var nodes = document.querySelectorAll('.itemHover');
+        nodes.forEach((option) => {
             option.classList.remove('itemHover');
         })
     }
 
     function dragLeaveHandler(e, item){
-        var options = document.querySelectorAll('.itemHover');
-        options.forEach((option) => {
+        var nodes = document.querySelectorAll('.itemHover');
+        nodes.forEach((option) => {
             option.classList.remove('itemHover');
         })
     }
