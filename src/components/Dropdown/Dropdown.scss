@@ -10,7 +10,7 @@
         top: 100%;
         width: 100%;
         min-width: 200px;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
         z-index: 10;
         
     }
@@ -30,16 +30,17 @@
     .dropdown__selectedItems{
         padding: 10px 0;
         display: flex;
+        flex-wrap: wrap;
 
         p{
             padding: 0 10px;
-            margin: 0 5px;
+            margin: 2px 5px;
             border-radius: 5px;
             background-color: rgb(157, 223, 139);
             cursor: pointer;
 
             &.dropdown__title{
-                background-color: white;
+                background-color: rgb(255, 255, 255);
             }
 
             &.itemHover{
