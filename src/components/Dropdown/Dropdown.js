@@ -19,7 +19,7 @@ const Dropdown = (props) => {
 
     useEffect(() => {
         setOptions(props.options.filter(x => !props.value.includes(x.id)));
-    }, [props.value])
+    }, [props.value, props.options])
 
     useEffect(() => {
         document.addEventListener('mousedown', closeDropdownHandler);
